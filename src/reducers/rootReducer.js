@@ -32,11 +32,13 @@ const rootReducer = (state = initState, action) =>{
                 state.moviezs = response.data;
                 return state;
             });
+            break;
         case "MOVIE":
             axios.get('https://www.omdbapi.com/', {params:{'apiKey': 'bdbf7fa8', 'i': 'tt3896198'}}).then((response) =>{
                 state.movie = response.data;
                 return state;
             });
+            break;
         default:
             return state;
         // break;
