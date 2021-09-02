@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 
 const MovieDetails = () => {
     const {id} = useParams()
+    console.log(id);
     const moviez = useSelector(state => state.moviezs);
     const movieO = useSelector(state => state.movie);
     const toggle = (id) => {
@@ -18,11 +19,12 @@ const MovieDetails = () => {
         element.classList.toggle("toggled");
     }
 
+
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(movie());
-    }, []);
+    });
     return (
         <div className="main-wrapper">
             
@@ -30,7 +32,6 @@ const MovieDetails = () => {
                 <div className="col-md-3">
                     <img src={movieO.Poster} alt="movie avatar" className="view-movie-img" width="100%" height="400px" />
                 </div>
-                {/* <button onClick={() => dispatch(movie())}>Show</button> */}
                 <div className="col-md-6 view-movie-details">
                     <h1 className="view-movie-head">{movieO.Title}</h1>
                     <h4 className="view-movie-text">
@@ -41,7 +42,7 @@ const MovieDetails = () => {
                             <span>
                                 <img src={timeLogo} alt="showFlix Time Logo" width="15" />
                             </span>
-                            <span className="movie-de">{movieO.Released}</span>
+                            <span className="movie-de"> {movieO.Released}</span>
                         </div>
 
                         <div className="col-sm-6 col-lg-4">
