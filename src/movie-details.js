@@ -1,4 +1,3 @@
-import movieAvatar from './assets/img/Normal Radius.png';
 import timeLogo from './assets/img/Time.svg';
 import starLogo from './assets/img/Star.svg';
 import playLogo from './assets/img/Play.svg';
@@ -22,7 +21,7 @@ const MovieDetails = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(movie(id));
+        dispatch(movie());
     }, []);
     return (
         <div className="main-wrapper">

@@ -29,12 +29,12 @@ const rootReducer = (state = initState, action) =>{
     switch(action.type){
         case "MOVIES":
             axios.get('https://www.omdbapi.com/', {params:{'apiKey': 'bdbf7fa8', 's': 'mortal kombat'}}).then((response) =>{
-            return state.moviezs = response.data
+                state.moviezs = response.data;
+                return state;
             });
         case "MOVIE":
             axios.get('https://www.omdbapi.com/', {params:{'apiKey': 'bdbf7fa8', 'i': 'tt3896198'}}).then((response) =>{
                 state.movie = response.data;
-                console.log(state.movie)
                 return state;
             });
         default:
