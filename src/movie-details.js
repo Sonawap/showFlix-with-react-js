@@ -24,6 +24,9 @@ class MovieDetails extends Component{
             })
         });
 
+        let element = document.getElementById("wrapper");
+        element.classList.toggle("q");
+
         
 
     }

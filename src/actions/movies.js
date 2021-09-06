@@ -1,6 +1,6 @@
-export const movies = (sWord) => {
+export const movies = (getMovies) => {
     return {
         type: 'MOVIES',
-        sWord
+        getMovies
     };
 }

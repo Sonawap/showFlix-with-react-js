@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { getMovie } from '../actions/movie';
-import { movies } from '../actions/movies';
-import { useEffect } from 'react';
+import axios from 'axios';
+
 
 // const Movies = ({moviez}) => {
 function Movies({moviez}){
@@ -9,25 +9,30 @@ function Movies({moviez}){
     const Mo = (movie) =>{
         let element = document.getElementById("wrapper");
         element.classList.toggle("toggled");
-        dispatch(getMovie(movie));
-    }
-    
-    useEffect( ()=>{
-        dispatch(movies('fast and furious'));
+        axios.get('https://www.omdbapi.com/', {params:{'apiKey': 'bdbf7fa8', 'i': movie.imdbID}}).then((response) =>{
+            dispatch(getMovie(response.data));
+        });
         
-    });
-    return (
+    }
+
+    const wmovies = moviez ? (
         <div className="movie-container">
             {moviez.map((movie) => (
                 <div className="movie-list">
                     <div className="movie" style={{ 
                         backgroundImage : `url(${movie.Poster})`
-                     }} key={movie.imdbID}>
+                    }} key={movie.imdbID}>
                         <button className="movie-btn" type="submit" id="menu-toggle" onClick={() => {Mo(movie)}}>View</button>
                     </div>
                 </div>
             ))}
         </div>
+    ) : (
+        <div>No Movies avalibale</div>
+    )
+ 
+    return (
+        <div>{ wmovies }</div>
     );
 }
  

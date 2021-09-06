@@ -3,16 +3,27 @@ import searchLogo3 from '../assets/img/Search3.svg';
 import Movies from './movie-list';
 import { useState } from 'react';
 import { movies } from '../actions/movies';
+import axios from 'axios';
 // import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-const Main = ({toggle, moviez}) => {
+import { useEffect } from 'react';
+const Main = ({toggle}) => {
     const dispatch = useDispatch();
-    const [sWord, setValue] = useState('fast and furoius');
+    const [sWord, setValue] = useState('');
+    const [moviez, setMovies] = useState([]);
     const handleChange = (e) => {
         // alert("ok")
         setValue(e.target.value); 
-        dispatch(movies(e.target.value));  
+        axios.get('https://www.omdbapi.com/', {params:{'apiKey': 'bdbf7fa8', 's':sWord}}).then((response) =>{
+            setMovies(response.data.Search);
+            dispatch(movies(response.data.Search));
+        });
     }
+    useEffect( ()=>{
+        axios.get('https://www.omdbapi.com/', {params:{'apiKey': 'bdbf7fa8', 's':sWord}}).then((response) =>{
+            dispatch(movies(response.data.Search));
+        });
+    }, [dispatch, sWord]);
     return (
         <div className="main-wrapper">
             <h4>Explore</h4>
@@ -40,7 +51,7 @@ const Main = ({toggle, moviez}) => {
             <div className="searchtitle">
                 <span className="searchResult">Results for:</span>  <span className="searchResultTitle">{sWord}</span>
             </div>
-            <Movies toggle={toggle} moviez = {moviez} />
+            <Movies toggle={toggle} moviez = {moviez} sWord={sWord}/>
             </div>
         </div>
         
