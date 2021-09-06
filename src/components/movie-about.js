@@ -5,7 +5,8 @@ import { useSelector } from 'react-redux';
 
 
 const MovieAbout = ({toggle}) => {
-  const movie = useSelector(state => state.movie);
+    console.log(toggle)
+    const movie = useSelector(state => state.movie);
 
     return (
         <div id="sidebar-wrapper">

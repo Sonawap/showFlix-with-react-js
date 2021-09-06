@@ -1,5 +1,6 @@
-export function movie(){
+export function getMovie(gMovie){
     return {
-        type: 'MOVIE'
+        type: 'MOVIE',
+        gMovie
     };
 }

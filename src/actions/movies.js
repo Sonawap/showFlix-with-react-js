@@ -1,5 +1,6 @@
-export const movies = () => {
+export const movies = (sWord) => {
     return {
-        type: 'MOVIES'
+        type: 'MOVIES',
+        sWord
     };
 }

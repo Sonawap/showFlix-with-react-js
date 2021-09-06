@@ -5,39 +5,45 @@ import MovieAbout from './components/movie-about';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Main from './components/main';
 import MovieDetails from './movie-details';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
+import { connect } from 'react-redux';
+import { Component } from 'react';
 
 
-function App() {
-  const moviez = useSelector(state => state.moviezs);
-  const toggle = (id) => {
-    console.log(id)
-    let element = document.getElementById("wrapper");
-    element.classList.toggle("toggled");
-  }
+class App extends Component{
 
-  return (
-    <Router>
-      <div className="App">
-        <div id="wrapper">
-          <div className="div-row" id="page-content-wrapper">
-            <Nav />
-            <div className="main" id="">
-              <Switch>
-                <Route exact path="/">
-                  <Main toggle={toggle}  moviez = {moviez}/>
-                </Route>
-                <Route path="/movie/:id">
-                  <MovieDetails />
-                </Route>
-              </Switch>
+  render(){
+    const moviez = this.props.moviezs
+
+    return (
+      <Router>
+        <div className="App">
+          <div id="wrapper">
+            <div className="div-row" id="page-content-wrapper">
+              <Nav />
+              <div className="main" id="">
+                <Switch>
+                  <Route exact path="/">
+                    <Main moviez = {moviez}/>
+                  </Route>
+                  <Route path="/movie/:id">
+                    <MovieDetails />
+                  </Route>
+                </Switch>
+              </div>
             </div>
+            <MovieAbout />
           </div>
-          <MovieAbout toggle={toggle}/>
         </div>
-      </div>
-    </Router>
-  );
+      </Router>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = (state) =>{
+  return {
+    moviezs: state.moviezs
+  }
+}
+
+export default connect(mapStateToProps)(App);

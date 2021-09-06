@@ -1,9 +1,18 @@
 import searchLogo2 from '../assets/img/Search2.svg';
 import searchLogo3 from '../assets/img/Search3.svg';
 import Movies from './movie-list';
-
+import { useState } from 'react';
+import { movies } from '../actions/movies';
+// import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 const Main = ({toggle, moviez}) => {
-    
+    const dispatch = useDispatch();
+    const [sWord, setValue] = useState('fast and furoius');
+    const handleChange = (e) => {
+        // alert("ok")
+        setValue(e.target.value); 
+        dispatch(movies(e.target.value));  
+    }
     return (
         <div className="main-wrapper">
             <h4>Explore</h4>
@@ -14,7 +23,7 @@ const Main = ({toggle, moviez}) => {
                         <img src={searchLogo2} alt="showflix search logo" className="searchImg" />
                     </div>
                     <div className="search-field">
-                        <input type="text" className="form-field" placeholder="Search" />
+                        <input type="text" value={sWord} onChange={handleChange} className="form-field" placeholder="Search" onKeyUp={handleChange}/>
                     </div>
                 </div>
             </div>
@@ -29,7 +38,7 @@ const Main = ({toggle, moviez}) => {
         </div>
         <div className="movie-wrapper">
             <div className="searchtitle">
-                <span className="searchResult">Results for:</span>  <span className="searchResultTitle">Mortal Kombat</span>
+                <span className="searchResult">Results for:</span>  <span className="searchResultTitle">{sWord}</span>
             </div>
             <Movies toggle={toggle} moviez = {moviez} />
             </div>
