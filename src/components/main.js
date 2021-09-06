@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 const Main = ({toggle}) => {
     const dispatch = useDispatch();
-    const [sWord, setValue] = useState('');
+    const [sWord, setValue] = useState('mortal kombat');
     const [moviez, setMovies] = useState([]);
     const handleChange = (e) => {
         // alert("ok")
@@ -21,9 +21,10 @@ const Main = ({toggle}) => {
     }
     useEffect( ()=>{
         axios.get('https://www.omdbapi.com/', {params:{'apiKey': 'bdbf7fa8', 's':sWord}}).then((response) =>{
+            setMovies(response.data.Search);
             dispatch(movies(response.data.Search));
         });
-    }, [dispatch, sWord]);
+    }, [dispatch, sWord, moviez]);
     return (
         <div className="main-wrapper">
             <h4>Explore</h4>
