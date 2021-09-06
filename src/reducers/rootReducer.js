@@ -27,7 +27,6 @@ const rootReducer = (state = initState, action) =>{
                 ...state,
                 movie: action.getMovie
             }
-            break;
             // state.movie = action.gMovie
         default:
             return state;
