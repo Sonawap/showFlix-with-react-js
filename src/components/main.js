@@ -24,7 +24,7 @@ const Main = ({toggle}) => {
             setMovies(response.data.Search);
             dispatch(movies(response.data.Search));
         });
-    }, [dispatch, sWord, moviez]);
+    }, [dispatch, sWord]);
     return (
         <div className="main-wrapper">
             <h4>Explore</h4>
