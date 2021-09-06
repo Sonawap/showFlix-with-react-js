@@ -5,13 +5,16 @@ import { useSelector } from 'react-redux';
 
 
 const MovieAbout = ({toggle}) => {
-    console.log(toggle)
     const movie = useSelector(state => state.movie);
+    const hide = () =>{
+        let element = document.getElementById("wrapper");
+        element.classList.toggle("toggled");
+    }
 
     return (
         <div id="sidebar-wrapper">
             <div className="logo-wrap">
-                <img src={arrowLogo} onClick={toggle} alt="Movie title" id="menu-toggle2" />
+                <img src={arrowLogo} onClick={hide} alt="Movie title" id="menu-toggle2" />
             </div>
             <div className="movie-list mt-5">
                 <div className="movie-side">
